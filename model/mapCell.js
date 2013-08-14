@@ -5,9 +5,9 @@
 define(function() {
 	
 	// attributes
-	var MapCell = function(x, y, type) {
-		this.n = x*y; // hex number
-		this.type = type;
+	var MapCell = function(n, type) {
+		this.n = n; // hex number
+		this.type = type || "plain";
 	};
 
 	//method

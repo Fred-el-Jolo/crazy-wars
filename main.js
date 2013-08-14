@@ -7,7 +7,12 @@ requirejs.config({
     nodeRequire: require
 });
 
-requirejs(['model/infantry'],function(Infantry) {
-	var monInfanterie = new Infantry();
-	console.log("sight : "+monInfanterie.sight);
+
+requirejs(['model/map', 'server'],function(Map, Server) {
+	// start game
+	var m = new Map(15, 10);
+	console.log("cell n°100 : "+m.getCellN(100).type);
+
+	// start server
+	Server.start();
 });

@@ -1,23 +1,19 @@
-/*
-# Node server logic
-#
-*/
+/**
+ * Define Server class
+ */
 
+define(['http', 'url', 'router'], function(http, url, router) {
+	return {
+		start: function() {
+			http.createServer(function (request, response) {
+				router.resolve(url.parse(request.url));
 
-var http = require("http");
+				response.writeHead(200, {"Content-Type": "text/plain"});
+				response.write("Hello crazy wars World");
+				response.end();
+			}).listen(8888);
 
-function start() {
-  function onRequest(request, response) {
-    console.log("Request received.");
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("Hello crazy wars World");
-    response.end();
-  }
-
-  http.createServer(onRequest).listen(8888);
-  console.log("Server has started.");
-}
-
-exports.start = start;
-
-
+			console.log("Server has started.");
+		}
+	};
+});

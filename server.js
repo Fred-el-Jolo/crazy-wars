@@ -2,11 +2,11 @@
  * Define Server class
  */
 
-define(['http', 'url', 'router'], function(http, url, router) {
+define(['http', 'router'], function(http, router) {
 	return {
 		start: function() {
 			http.createServer(function (request, response) {
-				router.resolve(url.parse(request.url));
+				router.resolve(request, response);
 
 				response.writeHead(200, {"Content-Type": "text/plain"});
 				response.write("Hello crazy wars World");

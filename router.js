@@ -2,7 +2,7 @@
  * Define Router class
  */
 
-define(function() {
+define(['url'], function(url) {
 
 	// attributes
 	var Router = function() {
@@ -15,13 +15,13 @@ define(function() {
 		add: function(sUri, fn) {
 			this.routes[sUri] = fn;
 		},
-		resolve: function(oUrl) {
-			// TODO : la querystring de oUrl devra être passée sous forme de paramètres 
-			// à la fonction déclenchée
-			var fn = this.routes[oUrl.pathname];
+		resolve: function(oRequest, oResponse) {
+			var oUrl = url.parse(oRequest.url);
+            var oRoute = oUrl.pathname + '.' + oRequest.method.toLowerCase();
+            var fn = this.routes[oRoute];
 
 			if(typeof fn === "function")
-				fn.call(this, []);
+				fn.call(this, oRequest, oResponse);
 			/*else
 				console.log("router : no route for this pathname");*/
 		}

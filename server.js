@@ -11,7 +11,7 @@ define(['http', 'router'], function(http, router) {
 				response.writeHead(200, {"Content-Type": "text/plain"});
 				response.write("Hello crazy wars World");
 				response.end();
-			}).listen(process.env.PORT);
+			}).listen(8888);
 
 			console.log("Server has started.");
 		}

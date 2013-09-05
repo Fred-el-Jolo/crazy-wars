@@ -6,18 +6,18 @@ define(['router', 'eventEmitter'], function(router, eventEmitter) {
         console.log("METHOD : " + oRequest.method);
         console.log("URL : " + oRequest.url);
         
-        /*
-        eventEmitter.fire('generateMap', {data: {'id':'99'}, fn: function(result){
-            oResponse.writeHead(200, {"Content-Type": "text/plain"});
-            oResponse.write("Here's your map : ["+ result + "]");
-            oResponse.end();
-        }});
-        */
         
-
+        eventEmitter.fire('generateMap', {
+            data: {
+                'id':'99'
+            }, 
+            fn: function(result) { // the callback called after event action execution
+                oResponse.writeHead(200, {"Content-Type": "text/plain"});
+                oResponse.write("Here's your map : ["+ result + "]");
+                oResponse.end();
+            }
+        });      
 	});
-
-
-    
-	return null;
+	
+    return null;
 });

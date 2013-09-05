@@ -13,12 +13,17 @@ define(function() {
 	EventEmitter.prototype = {
 		
 		fire : function(event, obj) {
-            var result;
-            var actions = this.events[event];
+            var actions = this.events[event],
+                scope = obj.scope || {},
+                datas = obj.data || {},
+                result;
+
             if (actions){
                 for (var i = 0; i < actions.length; i++) {
-                    result = actions[i].call(this, obj.data);
-                    obj.fn.call(this, result);
+                    result = actions[i].call(scope, datas);
+                    
+                    if(obj.fn && typeof obj.fn === "function")
+                        obj.fn.call(scope, result);
                 }
             }
 		},

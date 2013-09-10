@@ -20,8 +20,10 @@ define(['url'], function(url) {
             var oRoute = oUrl.pathname + '.' + oRequest.method.toLowerCase();
             var fn = this.routes[oRoute];
 
-			if(typeof fn === "function")
+			if(typeof fn === "function"){
 				fn.call(this, oRequest, oResponse);
+				console.log("router : access on route " + oRoute);
+			}
 			/*else
 				console.log("router : no route for this pathname");*/
 		}

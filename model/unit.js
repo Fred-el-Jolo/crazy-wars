@@ -19,7 +19,9 @@ define(function() {
 		this.defense = 0;  // int
 
 		// unit position
-		position     = 0;  // int, hex number
+		this.position     = 0;  // int, hex number
+		
+	    this.action = null;
 	};
 
 	//methods

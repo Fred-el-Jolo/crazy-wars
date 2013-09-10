@@ -27,13 +27,7 @@ requirejs.config({
 
 
 
-requirejs(['model/map', 'server'],function(Map, Server) {
-	// start game
-	console.log("Creating new game...");
-	var m = new Map(15, 10);
-	
-	
-
+requirejs(['server'],function(Server) {
 	// start server
 	console.log("Starting server...");
 	Server.start();

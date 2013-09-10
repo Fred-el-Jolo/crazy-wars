@@ -27,6 +27,21 @@ define(['model/mapCell'], function(MapCell) {
 
 		getCellN: function(n) {
 			return this.cells[n];
+		},
+
+		getJson: function() {
+			var obj = {
+				map: []
+			};
+
+			for (var i = 0, ii = this.cells.length; i < ii; i++) {
+				obj.map.push({
+					n: i,
+					type: this.cells[i].type
+				});
+			}
+
+			return obj;
 		}
 	};
 

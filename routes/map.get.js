@@ -1,19 +1,29 @@
-define(['router', 'eventEmitter'], function(router, eventEmitter) {
+define(['router', 'eventEmitter', 'url'], function(router, eventEmitter, url) {
 
 
 	router.add("/map.get", function(oRequest, oResponse) {
-		console.log("map.get : YEAH !!! Here's the map !");
-        console.log("METHOD : " + oRequest.method);
-        console.log("URL : " + oRequest.url);
-        
-        
+        var oUrl = url.parse(oRequest.url, true);
+        var params = oUrl.query;
+        var height = params.h;
+        var width = params.w;
+
+        if(!width || !height) {
+            oResponse.writeHead(400, "Height and width are mandatories parameters.");
+            oResponse.end();
+            return;
+        }
+
         eventEmitter.fire('generateMap', {
             data: {
-                'id':'99'
+                height: height,
+                width: width
             }, 
             fn: function(result) { // the callback called after event action execution
-                oResponse.writeHead(200, {"Content-Type": "text/plain"});
-                oResponse.write("Here's your map : ["+ result + "]");
+                oResponse.writeHead(200, {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*"
+                });
+                oResponse.write(JSON.stringify(result));
                 oResponse.end();
             }
         });      

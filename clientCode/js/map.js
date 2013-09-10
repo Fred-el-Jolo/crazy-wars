@@ -1,19 +1,24 @@
 CrazyWars.map = {
     canvas: null,
     context: null,
+    size: {
+        width: 0,
+        height: 0
+    },
     hexes: [],
     scale: 1,
     
     trace: function(id, scale) {
         this.canvas = $("#"+id)[0];
         this.context = this.canvas.getContext("2d");
+        
         if(scale)
             this.scale = scale;
         
         var SIN60 = Math.sin(Math.PI/3);
 
-        for(var j=0; j<5; j++) {
-            for(var i=0; i<10; i++) {
+        for(var j=0; j<this.size.height; j++) {
+            for(var i=0; i<this.size.width; i++) {
                 this.hex(i*1.5, (j*Math.sqrt(3))+(i%2==0?0:SIN60), this.scale);
             }
         }
@@ -57,10 +62,6 @@ CrazyWars.map = {
         ctx.rect((x+1)*scale, (y+1)*scale, 1, 1);
         ctx.stroke();
         ctx.closePath();
-        /*ctx.beginPath();
-        ctx.arc((x+1)*scale, (y+1)*scale, 1*scale, 0, 2*Math.PI);
-        ctx.stroke();
-        ctx.closePath();*/
 
         ctx.restore();
     },
@@ -88,10 +89,37 @@ CrazyWars.map = {
         }
 
         return selectedHex ? selectedHex.hex : null;
+    },
+
+    newMap: function(w, h) {
+        this.size.width = w;
+        this.size.height = h;
+
+        var url = "http://localhost:8888/map?w="+this.size.width+"&h="+this.size.height;
+        $.ajax(url, {
+            type: "GET",
+            dataType: "json",
+            context: this,
+            success: function(data, textStatus, jqXHR) {
+                if(data && data.map && $.isArray(data.map)) {
+                    for(var i=0, ii=data.map.length; i<ii; i++) {
+                        this.hexes.push({
+                            coords: {
+                                x: i%this.size.width,
+                                y: Math.floor(i/this.size.height)
+                            },
+                            type: data.map[i].type
+                        });
+                    }
+                }
+
+                this.trace("map", 20);
+            }
+        });
     }
 };
 
 // exec
 $(document).ready(function() {
-    CrazyWars.map.trace("map", 20);
+    CrazyWars.map.newMap(20, 10);
 });

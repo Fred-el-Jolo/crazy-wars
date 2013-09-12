@@ -9,7 +9,6 @@ define(function() {
 		this.id = 0;
 		this.players = [];
 		this.map = null;
-		this.actions = [];
 	}
 
 	// methods

@@ -7,7 +7,7 @@ define(['router', 'fs'], function(router, fs) {
             }       
             oResponse.writeHead(200, {"Content-Type": "text/html"});  
             oResponse.write(page);  
-            oResponse.end();  
+            oResponse.end();
         });
     });
 	

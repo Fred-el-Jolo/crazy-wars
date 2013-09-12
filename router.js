@@ -16,7 +16,7 @@ define(['url'], function(url) {
 			this.routes[sUri] = fn;
 		},
 		resolve: function(oRequest, oResponse) {
-			var oUrl = url.parse(oRequest.url);
+		    var oUrl = url.parse(oRequest.url);
             var oRoute = oUrl.pathname + '.' + oRequest.method.toLowerCase();
             var fn = this.routes[oRoute];
 

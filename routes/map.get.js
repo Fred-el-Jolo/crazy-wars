@@ -2,12 +2,7 @@ define(['router', 'eventEmitter'], function(router, eventEmitter) {
 
 
 	router.add("/map.get", function(oRequest, oResponse) {
-		console.log("map.get : YEAH !!! Here's the map !");
-        console.log("METHOD : " + oRequest.method);
-        console.log("URL : " + oRequest.url);
-        
-        
-        eventEmitter.fire('generateMap', {
+		eventEmitter.fire('generateMap', {
             data: {
                 'id':'99'
             }, 

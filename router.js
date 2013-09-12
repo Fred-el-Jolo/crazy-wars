@@ -20,6 +20,12 @@ define(['url'], function(url) {
             var oRoute = oUrl.pathname + '.' + oRequest.method.toLowerCase();
             var fn = this.routes[oRoute];
 
+            if (!fn){
+                if (oRoute.indexOf('/lib/') >= 0 || oRoute.indexOf('/js/') >=0 ){
+    			    fn = this.routes['/static-ressource.get'];
+    			}
+            }
+			
 			if(typeof fn === "function"){
 				fn.call(this, oRequest, oResponse);
 				console.log("router : access on route " + oRoute);

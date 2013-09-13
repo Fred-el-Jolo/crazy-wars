@@ -15,15 +15,14 @@ define(function() {
 		fire : function(event, obj) {
             var actions = this.events[event],
                 scope = obj.scope || {},
-                datas = obj.data || {},
-                result;
+                datas = obj.data || {};
 
             if (actions){
                 for (var i = 0; i < actions.length; i++) {
-                    result = actions[i].call(scope, datas);
+                    actions[i].call(scope, datas);
                     
                     if(obj.fn && typeof obj.fn === "function")
-                        obj.fn.call(scope, result);
+                        obj.fn.call(scope);
                 }
             }
 		},

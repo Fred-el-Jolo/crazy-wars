@@ -7,29 +7,25 @@ define(['eventEmitter'],function(eventEmitter) {
 
     	eventEmitter.fire('newPlayer1', {
     		fn: function() {
-    			console.log("player 1 is created ? "+this.me.players.player1);
+    			console.log("player 1 is created ? "+this.players.player1);
     		},
-    		scope: {
-    			me: this
-    		}
+    		scope: this
     	});
 
     	eventEmitter.fire('newPlayer2', {
     		fn: function() {
-    			console.log("player 2 is created ? "+this.me.players.player2);
+    			console.log("player 2 is created ? "+this.players.player2);
     		},
-    		scope: {
-    			me: this
-    		}
+    		scope: this
     	});
 
     });
 
     eventEmitter.on('newPlayer1', function() {
-    	this.me.players.player1 = "Player 1";
+    	this.players.player1 = "Player 1";
     });
 
     eventEmitter.on('newPlayer2', function() {
-    	this.me.players.player2 = "Player 2";       
+    	this.players.player2 = "Player 2";       
     });
 });

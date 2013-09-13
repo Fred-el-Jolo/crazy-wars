@@ -19,49 +19,51 @@ CrazyWars.map = {
 
         for(var j=0; j<this.size.height; j++) {
             for(var i=0; i<this.size.width; i++) {
-                this.hex(i*1.5, (j*Math.sqrt(3))+(i%2==0?0:SIN60), this.scale);
+                this.hex(this.hexes[j*this.size.width+i], i*1.5, (j*Math.sqrt(3))+(i%2==0?0:SIN60));
             }
         }
 
         // bind a listener
-        $("#"+id).click(this, function(oEvent) {
-            var me = oEvent.data;
-            console.log(me.getHex(oEvent.offsetX, oEvent.offsetY));
-        })
+        $("#"+id).click(this, this.onClick)
     },
     
     // assuming x and y are the no of hex
-    hex: function(x, y) {
+    hex: function(hex, x, y, selected) {
+        var hexSelected = selected ? true : false;      
         var ctx = this.context;
         var SIN60 = Math.sin(Math.PI/3);
         var scale = this.scale;
 
         ctx.save();
-        
-        ctx.beginPath();
-        ctx.moveTo(x * scale, (y+1) * scale);
-        ctx.lineTo((x+0.5) * scale, (y+1-SIN60) * scale);
-        ctx.lineTo((x+1.5) * scale, (y+1-SIN60) * scale);
-        ctx.lineTo((x+2) * scale, (y+1) * scale);
-        ctx.lineTo((x+1.5) * scale, (y+1+SIN60) * scale);
-        ctx.lineTo((x+0.5) * scale, (y+1+SIN60) * scale);
-        ctx.closePath();
-        
-        ctx.strokeStyle = "black";
-        ctx.fillStyle = "red";
-        ctx.lineWidth = 1;  
-        ctx.stroke();
-        ctx.fill();
 
-        this.hexes.push({
-            coords: {x:x, y:y},
-            center: {x:(x+1)*scale, y:(y+1)*scale}
-        });
+        // render type of terrain
+        var img = new Image();
+        img.src = "images/hex/plain.png";
+        img.onload = function() {
+            ctx.drawImage(this, x*scale, (y+1-SIN60) * scale, this.width*scale/100, this.height*scale/100);
 
-        ctx.beginPath();
-        ctx.rect((x+1)*scale, (y+1)*scale, 1, 1);
-        ctx.stroke();
-        ctx.closePath();
+            ctx.beginPath();
+            ctx.moveTo(x * scale, (y+1) * scale);
+            ctx.lineTo((x+0.5) * scale, (y+1-SIN60) * scale);
+            ctx.lineTo((x+1.5) * scale, (y+1-SIN60) * scale);
+            ctx.lineTo((x+2) * scale, (y+1) * scale);
+            ctx.lineTo((x+1.5) * scale, (y+1+SIN60) * scale);
+            ctx.lineTo((x+0.5) * scale, (y+1+SIN60) * scale);
+            ctx.closePath();
+            
+            if(hexSelected)
+                ctx.strokeStyle = "yellow";
+            else
+                ctx.strokeStyle = "black";
+
+            ctx.lineWidth = 1;  
+            ctx.stroke();
+        }        
+
+        hex["center"] = {
+            x: (x+1)*scale, 
+            y: (y+1)*scale
+        };
 
         ctx.restore();
     },
@@ -116,6 +118,14 @@ CrazyWars.map = {
                 this.trace("map", 20);
             }
         });
+    },
+
+    onClick: function(oEvent) {
+        var me = oEvent.data;
+        var hex = me.getHex(oEvent.offsetX, oEvent.offsetY);
+        if(hex) {
+            me.hex(hex.coords.x, hex.coords.y, true);
+        }
     }
 };
 

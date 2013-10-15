@@ -1,3 +1,6 @@
+var host = 'crazy-wars-c9-fred-el-jolo.c9.io';
+var port = '80';
+
 CrazyWars.map = {
     canvas: null,
     context: null,
@@ -97,7 +100,7 @@ CrazyWars.map = {
         this.size.width = w;
         this.size.height = h;
 
-        var url = "http://localhost:8888/map?w="+this.size.width+"&h="+this.size.height;
+        var url = "https://crazy-wars-c9-fred-el-jolo.c9.io/map?w="+this.size.width+"&h="+this.size.height;
         $.ajax(url, {
             type: "GET",
             dataType: "json",
@@ -122,7 +125,7 @@ CrazyWars.map = {
 
     onClick: function(oEvent) {
         var me = oEvent.data;
-        var hex = me.getHex(oEvent.offsetX, oEvent.offsetY);
+        var hex = me.getHex(oEvent.clientX, oEvent.clientY);
         if(hex) {
             me.hex(hex.coords.x, hex.coords.y, true);
         }
@@ -130,6 +133,6 @@ CrazyWars.map = {
 };
 
 // exec
-$(document).ready(function() {
-    CrazyWars.map.newMap(20, 10);
-});
+// $(document).ready(function() {
+//     CrazyWars.map.newMap(20, 10);
+// });

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crazy wars >> Session</title>
+  <meta name="description" content="War game" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script type="text/javascript" src="lib/jquery-1.10.2.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.css">
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="js/crazy-wars.js"></script>
+  <script type="text/javascript" src="js/map.js"></script>
+  
+  <!--[if lt IE 8]>
+  <![endif]-->
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Crazy wars !!!</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class=".col-md-1">&nbsp;</div>
+            <div class=".col-md-10 text-center">
+				<div for="username1">First player name</div>
+				<div for="username2">Second player name</div>
+				<canvas width="900" height="500" id="map"></canvas>
+            </div>
+            <div class=".col-md-1">&nbsp;</div>
+        </div>
+    </div>
+
+<hr />
+
+	<div class="jumbotron">
+	    <h2>DEBUG MODE</h2>
+	    <div id="debug-panel" class="container"/>
+	</div>
+</body>
+</html>

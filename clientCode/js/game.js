@@ -11,7 +11,8 @@ CrazyWars.game = {
             dataType: "json",
             context: this,
             success: function(data, textStatus) {
-                $('#debug-panel').html(JSON.stringify(data));
+                //$('#debug-panel').html(JSON.stringify(data));
+                this.document.location = 'session.html';
             },
             error: function(data, message){
                 alert('Error : ' + data + ' - ' + message);

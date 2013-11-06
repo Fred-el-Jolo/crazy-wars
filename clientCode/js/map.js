@@ -133,6 +133,6 @@ CrazyWars.map = {
 };
 
 // exec
-// $(document).ready(function() {
-//     CrazyWars.map.newMap(20, 10);
-// });
+ $(document).ready(function() {
+     CrazyWars.map.newMap(20, 10);
+});

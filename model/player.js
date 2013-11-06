@@ -5,10 +5,10 @@
 define(function() {	
 	
 	// attributes
-	var Player = function() {
+	var Player = function(username) {
 		this.id = null;
 		this.settings = null;
-    	this.username = null;
+    	this.username = username;
     	this.units = [];
     	this.score = 0;
     	this.status = null;
@@ -16,7 +16,9 @@ define(function() {
 
     // methods
     Player.prototype = {
-        
+        getUsername: function() {
+			return this.username;
+		}
 	};
 
 	return Player;

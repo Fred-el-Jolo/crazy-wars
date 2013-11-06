@@ -11,8 +11,21 @@ define(['url', 'router', 'fs'], function(url, router, fs) {
             fs.readFile('clientCode' + path, function (err, page) {
                 if (err) {
                     throw err;
-                }       
-                oResponse.writeHead(200, {"Content-Type": "application/javascript"});  
+                }
+                
+                var jsPattern = /\.js$/;
+                var cssPattern = /\.css$/;
+                var jsMatch = jsPattern.exec(oRoute);
+                var cssMatch = cssPattern.exec(oRoute);
+                var contentType = '';
+                if (jsMatch && jsMatch.length > 0){
+                    contentType = 'application/javascript';
+                }
+                else if (jsMatch && jsMatch.length > 0){
+                    contentType = 'text/css';
+                }
+                
+                oResponse.writeHead(200, {"Content-Type": contentType});  
                 oResponse.write(page);  
                 oResponse.end();
             });    

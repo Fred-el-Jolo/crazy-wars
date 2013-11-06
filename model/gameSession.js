@@ -5,8 +5,9 @@
 define(function() {
 
 	// attributes
-	var GameSession = function(width, height) {
-		this.id = 0;
+	var GameSession = function() {
+		this.sessionId = 0;
+		this.playersId = 0;
 		this.players = [];
 		this.map = null;
 	}
@@ -15,23 +16,15 @@ define(function() {
 	GameSession.prototype = {
 		
 		// Initialize the game session
-		initialize: function() {
-		
-		    // Initialise GameEngine
-			
-			// Initialise Settings
-			
-			// Initialise Players
-			
-			
+		addPlayer: function(player) {
+		    if (player){
+		        player.id = this.playersId;
+		        this.players.push(player);
+		        this.playersId++;
+		    }
 		},
-
-		getCellXY: function(x, y) {
-			return this.cells[x*y];
-		},
-
-		getCellN: function(n) {
-			return this.cells[n];
+		setMap: function(map) {
+			this.map = map;
 		}
 	};
 

@@ -8,6 +8,10 @@ define(['eventEmitter', 'model/map'],function(eventEmitter, Map) {
 
         var map = new Map(width, height);
 
-        return map.getJson();
+        var json = map.getJson();
+        
+        this.status = 200;
+        this.message = 'Map generated';
+        this.result = json;
     });
 });

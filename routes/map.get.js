@@ -17,16 +17,21 @@ define(['router', 'eventEmitter', 'url'], function(router, eventEmitter, url) {
             data: {
                 height: height,
                 width: width
-            }, 
-            fn: function(result) { // the callback called after event action execution
+            },
+            scope: {
+                status: 0,
+                message: '',
+                result: null
+            },
+            fn: function() { // the callback called after event action execution
                 oResponse.writeHead(200, {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*"
                 });
-                oResponse.write(JSON.stringify(result));
+                oResponse.write(JSON.stringify(this.result));
                 oResponse.end();
             }
-        });      
+        });
 	});
 	
     return null;

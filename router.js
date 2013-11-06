@@ -21,7 +21,7 @@ define(['url'], function(url) {
             var fn = this.routes[oRoute];
 
             if (!fn){
-                if (oRoute.indexOf('/lib/') >= 0 || oRoute.indexOf('/js/') >=0 ){
+                if (oRoute.indexOf('/lib/') >= 0 || oRoute.indexOf('/js/') >=0 || oRoute.indexOf('/images/') >=0){
     			    fn = this.routes['/static-ressource.get'];
     			}
             }
@@ -30,8 +30,6 @@ define(['url'], function(url) {
 				fn.call(this, oRequest, oResponse);
 				console.log("router : access on route " + oRoute);
 			}
-			/*else
-				console.log("router : no route for this pathname");*/
 		}
 	};
 
